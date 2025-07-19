@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import Map from "@/components/Map";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
         Welcome to Sustainamap
       </h1>
       <Button>Click Me</Button>
+      <Map />
     </section>
   );
 }
