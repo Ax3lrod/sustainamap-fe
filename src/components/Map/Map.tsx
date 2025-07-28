@@ -1,10 +1,13 @@
 "use client";
 
 import "leaflet/dist/leaflet.css";
+import "@/lib/leafleticon";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import { useState, useEffect } from "react";
+import L from "leaflet";
 import MapSidebar from "./MapSidebar";
 import useGetForest from "./useGetForest";
+import useGetPLTU from "./useGetPLTU";
 
 const googleapikey = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_API_KEY;
 const aqicnApiKey = process.env.NEXT_PUBLIC_AQICN_API_KEY;
@@ -22,6 +25,7 @@ function Map() {
     );
   }, []);
   const { forestData } = useGetForest();
+  const { pltuData } = useGetPLTU();
   const [showAQILayer, setShowAQILayer] = useState(false);
   const [showForestLayer, setShowForestLayer] = useState(false);
   const [showFactoryLayer, setShowFactoryLayer] = useState(false);
@@ -51,27 +55,42 @@ function Map() {
       /> </>}
       {showForestLayer && forestData && (
         <GeoJSON
-        data={forestData}
-        style={(feature) => {
-          const forest = feature?.properties?.numerical_value;
-          let fillColor;
-          if (forest > 80) fillColor = "#005a32";  
-          else if (forest > 40) fillColor = "#66c2a4"; 
-          else if (forest > 0) fillColor = "#ccece6"; 
-          else fillColor = "#ccc";      
-          return {
-            color: "#FFF",
-            weight: 1,
-            fillOpacity: 0.7,
-            fillColor,
-          }    
-        }}
-        onEachFeature={(feature, layer) => {
-          const name = feature?.properties?.name || "Unknown";
-          const forest = feature?.properties?.numerical_value ?? "N/A";
-          layer.bindPopup(`Wilayah: ${name}<br/>Forest Cover: ${forest}%`);
-        }}
-      />
+          data={forestData}
+          style={(feature) => {
+            const forest = feature?.properties?.numerical_value;
+            let fillColor;
+            if (forest > 80) fillColor = "#005a32";
+            else if (forest > 40) fillColor = "#66c2a4";
+            else if (forest > 0) fillColor = "#ccece6";
+            else fillColor = "#ccc";
+            return {
+              color: "#FFF",
+              weight: 1,
+              fillOpacity: 0.7,
+              fillColor,
+            };
+          }}
+          onEachFeature={(feature, layer) => {
+            const name = feature?.properties?.name || "Unknown";
+            const forest = feature?.properties?.numerical_value ?? "N/A";
+            layer.bindPopup(`Wilayah: ${name}<br/>Forest Cover: ${forest}%`);
+          }}
+        />
+      )}
+      {pltuData && (
+        <GeoJSON
+          data={pltuData}
+          pointToLayer={(feature, latlng) => L.marker(latlng)}
+          onEachFeature={(feature, layer) => {
+            const props = feature.properties;
+            layer.bindPopup(`
+              <b>${props.name} - ${props.unit_name}</b><br/>
+              Capacity: ${props.capacity_mw} MW<br/>
+              Status: ${props.status}<br/>
+              <a href="${props.wiki_url}" target="_blank">Wiki</a>
+            `);
+          }}
+        />
       )}
     </MapContainer>
     <MapSidebar
