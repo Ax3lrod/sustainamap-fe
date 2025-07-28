@@ -33,76 +33,78 @@ function Map() {
 
   return (
     <>
-    <MapContainer
-      center={center}
-      zoom={13}
-      scrollWheelZoom={true}
-      className="h-full w-full z-0"
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      {showAQILayer &&
-      <>
-      <TileLayer
-        url={`https://airquality.googleapis.com/v1/mapTypes/US_AQI/heatmapTiles/{z}/{x}/{y}?key=${googleapikey}`}
-        opacity={0.4}
-      />
-      <TileLayer
-        url={`https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=${aqicnApiKey}`}
-        attribution='Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>'
-      /> </>}
-      {showForestLayer && forestData && (
-        <GeoJSON
-          data={forestData}
-          style={(feature) => {
-            const forest = feature?.properties?.numerical_value;
-            let fillColor;
-            if (forest > 80) fillColor = "#005a32";
-            else if (forest > 40) fillColor = "#66c2a4";
-            else if (forest > 0) fillColor = "#ccece6";
-            else fillColor = "#ccc";
-            return {
-              color: "#FFF",
-              weight: 1,
-              fillOpacity: 0.7,
-              fillColor,
-            };
-          }}
-          onEachFeature={(feature, layer) => {
-            const name = feature?.properties?.name || "Unknown";
-            const forest = feature?.properties?.numerical_value ?? "N/A";
-            layer.bindPopup(`Wilayah: ${name}<br/>Forest Cover: ${forest}%`);
-          }}
+      <MapContainer
+        center={center}
+        zoom={13}
+        scrollWheelZoom={true}
+        className="h-full w-full z-0"
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-      )}
-      {pltuData && (
-        <GeoJSON
-          data={pltuData}
-          pointToLayer={(feature, latlng) => L.marker(latlng)}
-          onEachFeature={(feature, layer) => {
-            const props = feature.properties;
-            layer.bindPopup(`
+        {showAQILayer && (
+          <>
+            <TileLayer
+              url={`https://airquality.googleapis.com/v1/mapTypes/US_AQI/heatmapTiles/{z}/{x}/{y}?key=${googleapikey}`}
+              opacity={0.4}
+            />
+            <TileLayer
+              url={`https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=${aqicnApiKey}`}
+              attribution='Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>'
+            />{" "}
+          </>
+        )}
+        {showForestLayer && forestData && (
+          <GeoJSON
+            data={forestData}
+            style={(feature) => {
+              const forest = feature?.properties?.numerical_value;
+              let fillColor;
+              if (forest > 80) fillColor = "#005a32";
+              else if (forest > 40) fillColor = "#66c2a4";
+              else if (forest > 0) fillColor = "#ccece6";
+              else fillColor = "#ccc";
+              return {
+                color: "#FFF",
+                weight: 1,
+                fillOpacity: 0.7,
+                fillColor,
+              };
+            }}
+            onEachFeature={(feature, layer) => {
+              const name = feature?.properties?.name || "Unknown";
+              const forest = feature?.properties?.numerical_value ?? "N/A";
+              layer.bindPopup(`Wilayah: ${name}<br/>Forest Cover: ${forest}%`);
+            }}
+          />
+        )}
+        {showFactoryLayer && pltuData && (
+          <GeoJSON
+            data={pltuData}
+            pointToLayer={(feature, latlng) => L.marker(latlng)}
+            onEachFeature={(feature, layer) => {
+              const props = feature.properties;
+              layer.bindPopup(`
               <b>${props.name} - ${props.unit_name}</b><br/>
               Capacity: ${props.capacity_mw} MW<br/>
               Status: ${props.status}<br/>
               <a href="${props.wiki_url}" target="_blank">Wiki</a>
             `);
-          }}
-        />
-      )}
-    </MapContainer>
-    <MapSidebar
-      showAQILayer={showAQILayer}
-      setShowAQILayer={setShowAQILayer}
-      showForestLayer={showForestLayer}
-      setShowForestLayer={setShowForestLayer}
-      showFactoryLayer={showFactoryLayer}
-      setShowFactoryLayer={setShowFactoryLayer}
-      showReportLayer={showReportLayer}
-      setShowReportLayer={setShowReportLayer}
-    ></MapSidebar>
+            }}
+          />
+        )}
+      </MapContainer>
+      <MapSidebar
+        showAQILayer={showAQILayer}
+        setShowAQILayer={setShowAQILayer}
+        showForestLayer={showForestLayer}
+        setShowForestLayer={setShowForestLayer}
+        showFactoryLayer={showFactoryLayer}
+        setShowFactoryLayer={setShowFactoryLayer}
+        showReportLayer={showReportLayer}
+        setShowReportLayer={setShowReportLayer}
+      ></MapSidebar>
     </>
   );
 }
