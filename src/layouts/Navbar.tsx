@@ -19,7 +19,7 @@ export default function Navbar() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <nav className="flex w-full justify-center pt-3">
+    <nav className="flex w-full justify-center pt-3 fixed top-0 z-[999]">
       <div className="flex w-[90%] bg-primary-600 justify-between lg:py-6 py-3 lg:px-[60px] px-[30px] rounded-[85px] items-center">
         <Image
           src="/logo.png"
