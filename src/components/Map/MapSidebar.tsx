@@ -37,7 +37,7 @@ export default function MapSidebar({showAQILayer,setShowAQILayer,showFactoryLaye
         }
     ]
   return (
-    <div className="absolute bottom-0 w-full grid-cols-2 gap-6 grid rounded-t-4xl md:w-fit md:top-30 md:flex md:flex-col md:right-0 z-10 bg-secondary h-fit py-10 px-6 md:rounded-l-4xl md:rounded-r-none md:space-y-4">
+    <div className="absolute bottom-0 w-full grid-cols-2 gap-6 grid rounded-t-4xl md:w-fit md:top-48 md:flex md:flex-col md:right-0 z-10 bg-secondary h-fit py-10 px-6 md:rounded-l-4xl md:rounded-r-none md:space-y-4">
     {items.map((item) => (
       <button key={item.name} onClick={item.toggle} className={`rounded-full py-2 px-6 cursor-pointer ${
             item.active ? "bg-primary-600 border-solid border-2 border-primary-600" : "bg-secondary border-solid border-2 border-primary-600"}`}>

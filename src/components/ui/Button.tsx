@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 
 import type { ButtonProps as BaseButtonProps } from "@heroui/react";
 
-type CustomVariant = "primary" | "secondary" | "tertiary" | "ghost";
+type CustomVariant = "primary" | "secondary" | "iconOnly";
 type ButtonOutlined = "base" | "outlined";
 type ButtonSize = "sm" | "md" | "lg";
 
@@ -23,7 +23,7 @@ const Button = forwardRef<HTMLButtonElement, CustomButtonProps>(
     const {
       Variant = "primary",
       outlined = "base",
-      size = "md",
+      size,
       leftIcon,
       rightIcon,
       ...restProps
@@ -69,7 +69,7 @@ const Button = forwardRef<HTMLButtonElement, CustomButtonProps>(
               "max-md:text-[14px] max-md:leading-[18px]",
             ],
             size === "sm" && [
-              "min-h-fit rounded-[12px] px-4 py-1",
+              "min-h-fit rounded-[12px] px-4",
               "text-[14px] leading-[20px]",
               "max-md:text-[12px] max-md:leading-[16px]",
             ],
@@ -93,6 +93,7 @@ const Button = forwardRef<HTMLButtonElement, CustomButtonProps>(
                 "border-2 border-yellow-500 bg-yellow-500/0 text-yellow-500",
               ],
             ],
+            Variant === "iconOnly" && ["bg-transparent"],
           ]
         )}
       >
