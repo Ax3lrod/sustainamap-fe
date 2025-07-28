@@ -14,6 +14,8 @@
   /*Gradient*/
 
   /*Fonts*/
-  --font-main: var(--font-poppins);
+  --font-title: var(--font-outfit);
+  --font-body: var(--font-poppins);
+  --font-outfit: "Outfit", sans-serif;
   --font-poppins: "Poppins", sans-serif;
 }

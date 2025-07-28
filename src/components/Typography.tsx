@@ -44,8 +44,8 @@ export default function Typography<T extends React.ElementType>({
         // *=============== Font Type ==================
         "text-black",
         [
-          font === "poppins" && [
-            "font-main",
+          font === "title" && [
+            "font-title",
             [
               weight === "extrabold" && "font-extrabold",
               weight === "regular" && "font-normal",
@@ -54,8 +54,8 @@ export default function Typography<T extends React.ElementType>({
               weight === "semibold" && "font-semibold",
             ],
           ],
-          font === "poppins" && [
-            "font-poppins",
+          font === "body" && [
+            "font-body",
             [
               weight === "extrabold" && "font-extrabold",
               weight === "regular" && "font-normal",
