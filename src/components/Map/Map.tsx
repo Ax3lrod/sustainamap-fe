@@ -3,6 +3,7 @@
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import { useState, useEffect } from "react";
+import MapSidebar from "./MapSidebar";
 import useGetForest from "./useGetForest";
 
 const googleapikey = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_API_KEY;
@@ -21,18 +22,25 @@ function Map() {
     );
   }, []);
   const { forestData } = useGetForest();
+  const [showAQILayer, setShowAQILayer] = useState(false);
+  const [showForestLayer, setShowForestLayer] = useState(false);
+  const [showFactoryLayer, setShowFactoryLayer] = useState(false);
+  const [showReportLayer, setShowReportLayer] = useState(false);
 
   return (
+    <>
     <MapContainer
       center={center}
       zoom={13}
       scrollWheelZoom={true}
-      className="h-full w-full"
+      className="h-full w-full z-0"
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
+      {showAQILayer &&
+      <>
       <TileLayer
         url={`https://airquality.googleapis.com/v1/mapTypes/US_AQI/heatmapTiles/{z}/{x}/{y}?key=${googleapikey}`}
         opacity={0.4}
@@ -40,8 +48,8 @@ function Map() {
       <TileLayer
         url={`https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=${aqicnApiKey}`}
         attribution='Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>'
-      />
-      {forestData && (
+      /> </>}
+      {showForestLayer && forestData && (
         <GeoJSON
         data={forestData}
         style={(feature) => {
@@ -66,6 +74,17 @@ function Map() {
       />
       )}
     </MapContainer>
+    <MapSidebar
+      showAQILayer={showAQILayer}
+      setShowAQILayer={setShowAQILayer}
+      showForestLayer={showForestLayer}
+      setShowForestLayer={setShowForestLayer}
+      showFactoryLayer={showFactoryLayer}
+      setShowFactoryLayer={setShowFactoryLayer}
+      showReportLayer={showReportLayer}
+      setShowReportLayer={setShowReportLayer}
+    ></MapSidebar>
+    </>
   );
 }
 
