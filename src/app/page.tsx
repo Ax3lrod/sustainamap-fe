@@ -1,14 +1,14 @@
 import Button from "@/components/ui/Button";
 import Map from "@/components/Map";
+import Typography from "@/components/Typography";
 
 export default function Home() {
   return (
-    <section className="w-full bg-secondary h-screen">
-      <h1 className="text-4xl font-bold text-center text-black font-poppins">
+    <section className="w-full h-screen bg-primary-500">
+      <Typography variant="h1" weight="extrabold" className="text-center">
         Welcome to Sustainamap
-      </h1>
-      <Button>Click Me</Button>
-      <Map />
+      </Typography>
+      <Button size="sm">Click Me</Button>
     </section>
   );
 }

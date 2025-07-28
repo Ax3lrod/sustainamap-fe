@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 
 import type { ButtonProps as BaseButtonProps } from "@heroui/react";
 
-type CustomVariant = "primary" | "danger" | "warning" | "success";
+type CustomVariant = "primary" | "secondary" | "tertiary" | "ghost";
 type ButtonOutlined = "base" | "outlined";
 type ButtonSize = "sm" | "md" | "lg";
 
@@ -59,17 +59,17 @@ const Button = forwardRef<HTMLButtonElement, CustomButtonProps>(
           "font-semibold",
           [
             size === "lg" && [
-              "min-h-fit rounded-lg px-8 py-3",
+              "min-h-fit rounded-[14px] px-8 py-3",
               "text-[20px] leading-[28px]",
               "max-md:text-[16px] max-md:leading-[24px]",
             ],
             size === "md" && [
-              "min-h-fit rounded-md px-6 py-2",
+              "min-h-fit rounded-[12px] px-6 py-2",
               "text-[16px] leading-[24px]",
               "max-md:text-[14px] max-md:leading-[18px]",
             ],
             size === "sm" && [
-              "min-h-fit rounded-sm px-4 py-1",
+              "min-h-fit rounded-[12px] px-4 py-1",
               "text-[14px] leading-[20px]",
               "max-md:text-[12px] max-md:leading-[16px]",
             ],
@@ -77,7 +77,16 @@ const Button = forwardRef<HTMLButtonElement, CustomButtonProps>(
           [
             Variant === "primary" && [
               outlined === "base" && [
-                "bg-yellow-500 text-black",
+                "bg-secondary text-primary-600",
+                "border-2 border-secondary",
+              ],
+              outlined === "outlined" && [
+                "border-2 border-secondary bg-secondary/0 text-secondary",
+              ],
+            ],
+            Variant === "secondary" && [
+              outlined === "base" && [
+                "bg-yellow-500 text-primary-600",
                 "border-2 border-yellow-500",
               ],
               outlined === "outlined" && [
