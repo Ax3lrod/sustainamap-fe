@@ -1,8 +1,9 @@
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
+import { MapContainer, TileLayer, ZoomControl, GeoJSON } from "react-leaflet";
 import useGetForest from "./useGetForest";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import * as L from "leaflet";
 
 import { useEffect, useState } from "react";
 
@@ -55,6 +56,7 @@ export default function MyMap() {
             layer.bindPopup(`${name} <br/> ${score}`);
           }}
       />
+      <ZoomControl position="bottomright" />
     </MapContainer>
   );
 }
