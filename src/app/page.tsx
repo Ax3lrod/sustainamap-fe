@@ -1,7 +1,9 @@
-import Typography from "@/components/Typography";
+import Map from "@/components/Map";
 
 export default function Home() {
   return (
-    <div className="bg-secondary w-full min-h-screen"></div>
+    <section className="w-screen h-screen bg-secondary">
+      <Map />
+    </section>
   );
 }
