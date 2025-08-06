@@ -133,8 +133,8 @@ export default function Typography<T extends React.ElementType> ({
           ],
           variant === 'bs' && [
             clsxm(
-              'text-[15px] leading-[20px]',
-              'max-md:text-[12px] max-md:leading-[16px]'
+              'text-[14px] leading-[20px]',
+              'max-md:text-[11px] max-md:leading-[16px]'
             ),
           ],
           variant === 'c' && [
