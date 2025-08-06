@@ -11,15 +11,6 @@ import useGetPLTU from "./useGetPLTU";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
-import * as L from "leaflet";
-import { Popup } from "leaflet";
-
-const markerIcon = L.icon({
-  iconUrl: "/public/leaflet/marker-icon.png",
-  iconSize: [32, 37],
-  iconAnchor: [16, 37],
-  popupAnchor: [0, -28],
-});
 
 import { useEffect, useState } from "react";
 
@@ -103,7 +94,6 @@ export default function MyMap() {
             onEachFeature={(feature, layer) => {
               const name = feature?.properties?.name;
               const unit_name = feature?.properties?.unit_name;
-              const status = feature?.properties?.status;
               const capacity_mw = feature?.properties?.capacity_mw;
               const wiki_url = feature?.properties?.wiki_url;
               const location = feature?.geometry?.coordinates;

@@ -102,7 +102,7 @@ function MobileView() {
 
 export default function RegisterPage() {
   return (
-    <div className="bg-[#1F3F32] py-16 px-14 w-full h-[100vh]">
+    <div className="bg-[#1F3F32] lg:py-16 lG:px-14 w-full h-full">
       <div className="flex flex-row-reverse justify-between">
         <MobileView />
         <div className="md:block hidden">
