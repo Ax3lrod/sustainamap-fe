@@ -5,10 +5,11 @@ export default function useGetForest () {
     queryKey: ['forest'],
     queryFn: async () => {
         const response = await fetch('/forest.geojson')
+        const data = await response.json();
         if (!response.ok) {
         throw new Error('Network response was not ok')
         }
-        return response.json()
+        return data;
     },
     });
     return {
