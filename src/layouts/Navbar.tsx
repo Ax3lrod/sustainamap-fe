@@ -10,7 +10,7 @@ import {
   Drawer,
   DrawerContent,
   DrawerBody,
-  useDisclosure,
+  useDisclosure
 } from "@heroui/react";
 
 export default function Navbar() {
@@ -43,7 +43,7 @@ export default function Navbar() {
             </Typography>
           </Link>
         </div>
-        <Link href="/login w-fit max-lg:hidden">
+        <Link href="/login">
           <Button className="rounded-xl bg-secondary font-bold text-primary-600 max-lg:hidden">
             Login
           </Button>
@@ -101,7 +101,7 @@ export default function Navbar() {
                         Laporan
                       </Typography>
                     </Link>
-                    <Link href="/login w-fit">
+                    <Link href="/login">
                       <Button
                         className="rounded-xl bg-secondary font-bold text-primary-600"
                         size="lg"
