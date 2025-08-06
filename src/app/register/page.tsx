@@ -19,19 +19,19 @@ function MobileView() {
     e.preventDefault();
 
     try {
-      const data = await axios.post("http://localhost:5000/auth/login", {
+      const data = await axios.post("http://localhost:5000/auth/register", {
         email: email,
         password: password
       });
 
       const rilData = await data.data;
       localStorage.setItem("userToken", rilData.data.token);
-
       // console.log(rilData);
-      toast.success("Logged in successfully!");
+      toast.success("User Registered Successfully!");
       setEmail("");
       setPassword("");
     } catch (err: any) {
+      // console.log(err.response.data.msg);
       toast.error(`Error: ${err.response.data.msg}`);
       setEmail("");
       setPassword("");
@@ -50,7 +50,7 @@ function MobileView() {
           </div>
 
           <div className="mt-10">
-            <Typography className="font-bold text-5xl">Login</Typography>
+            <Typography className="font-bold text-5xl">Register</Typography>
           </div>
 
           <div className="mt-16">
@@ -59,9 +59,9 @@ function MobileView() {
               key={1}
               value={email}
               onChange={(ev) => setEmail(ev.target.value)}
-              label="Username / Email"
+              label="Email"
               labelPlacement="outside"
-              placeholder="Masukkan username atau email anda"
+              placeholder="Masukkan email anda"
               type="email"
               required
               isRequired
@@ -72,6 +72,7 @@ function MobileView() {
               value={password}
               onChange={(ev) => setPassword(ev.target.value)}
               label="Password"
+              description="Password minimal terdiri dari 8 karakter dan memiliki huruf, angka dan simbol."
               labelPlacement="outside"
               placeholder="Masukkan password"
               type="password"
@@ -84,12 +85,12 @@ function MobileView() {
         {/* MOBILE BAWAH */}
         <div className="text-center">
           <Button type="submit" color="warning" className="w-full font-bold">
-            Login
+            Register
           </Button>
           <Typography className="inline-block mt-2">
-            Belum memiliki akun?{" "}
-            <Link href="/register" className="hover:underline text-[#00AEF2]">
-              Registrasi
+            Sudah memiliki akun?{" "}
+            <Link href="/login" className="hover:underline text-[#00AEF2]">
+              Login
             </Link>
           </Typography>
         </div>
@@ -99,14 +100,14 @@ function MobileView() {
   );
 }
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
-    <div className="bg-secondary py-16 px-14 w-full h-[100vh]">
-      <div className="flex flex-row justify-between">
+    <div className="bg-[#1F3F32] py-16 px-14 w-full h-[100vh]">
+      <div className="flex flex-row-reverse justify-between">
         <MobileView />
         <div className="md:block hidden">
           <Image
-            src="/globe-login.png"
+            src="/globe-register.png"
             alt="globe login"
             width={650}
             height={605}
