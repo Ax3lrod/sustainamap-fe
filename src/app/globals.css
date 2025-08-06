@@ -1,7 +1,13 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+@plugin '../lib/hero.ts';
+/* Note: You may need to change the path to fit your project structure */
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  /*Fonts*/
-  --font-outfit: var(--font-outfit);
-  --font-poppins: var(--font-poppins);
+@theme {
+  --color-primary-600: #1f3f32;
+  --color-primary-500: #0f7042;
+  --color-primary-300: #d4face;
+
+  --color-secondary: #fffdf4;
 }
