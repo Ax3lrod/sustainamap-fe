@@ -8,11 +8,13 @@ import {
 import Toggle from "./Toggle";
 import useGetForest from "./useGetForest";
 import useGetPLTU from "./useGetPLTU";
+import useGetLaporan from "./useGetLaporan";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 
 import { useEffect, useState } from "react";
+import { array } from "zod";
 
 const aqicn_token = process.env.NEXT_PUBLIC_AQICN_API_TOKEN;
 const googlecloud_token = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_API_TOKEN;
@@ -37,7 +39,8 @@ export default function MyMap() {
 
   const { forestData } = useGetForest();
   const { pltuData } = useGetPLTU();
-  console.log(pltuData);
+  const { laporanData } = useGetLaporan();
+  console.log(laporanData);
 
   return (
     <>
@@ -106,6 +109,9 @@ export default function MyMap() {
             }}
           />
         )}
+        {showReportLayer && Array.isArray  &&  laporanData.data.map((laporan, id) => {
+          <Marker position={[laporan.latitude, laporan.longitude]}></Marker>
+        })}
         <ZoomControl position="bottomright" />
       </MapContainer>
       <Toggle

@@ -39,7 +39,7 @@ function MobileView() {
   };
 
   return (
-    <div className="md:bg-white bg-secondary md:px-11 py-16 rounded-2xl md:w-[45%] w-full">
+    <div className="lg:bg-white bg-secondary lg:px-11 py-16 lg:rounded-2xl lg:w-[45%] w-full max-lg:h-screen p-10">
       {/* <div className="flex flex-col justify-between h-full"> */}
       <form onSubmit={doLogin} className="flex flex-col justify-between h-full">
         {/* MOBILE ATAS */}
@@ -103,9 +103,9 @@ function MobileView() {
 export default function RegisterPage() {
   return (
     <div className="bg-[#1F3F32] lg:py-16 lG:px-14 w-full h-full">
-      <div className="flex flex-row-reverse justify-between">
+      <div className="flex flex-row-reverse justify-between lg:pr-10">
         <MobileView />
-        <div className="md:block hidden">
+        <div className="lg:block hidden">
           <Image
             src="/globe-register.png"
             alt="globe login"

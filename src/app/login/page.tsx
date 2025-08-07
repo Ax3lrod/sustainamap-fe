@@ -39,7 +39,7 @@ function MobileView() {
   };
 
   return (
-    <div className="md:bg-white bg-secondary md:px-11 py-16 rounded-2xl md:w-[45%] w-full">
+    <div className="lg:bg-white bg-secondary lg:px-11 py-16 rounded-2xl lg:w-[45%] w-full h-full p-10">
       {/* <div className="flex flex-col justify-between h-full"> */}
       <form onSubmit={doLogin} className="flex flex-col justify-between h-full">
         {/* MOBILE ATAS */}
@@ -101,10 +101,10 @@ function MobileView() {
 
 export default function LoginPage() {
   return (
-    <div className="bg-secondary py-16 px-14 w-full h-[100vh]">
-      <div className="flex flex-row justify-between">
+    <div className="bg-primary-600 lg:py-16 lg:px-14 w-full h-[100vh]">
+      <div className="flex flex-row justify-between h-full">
         <MobileView />
-        <div className="md:block hidden">
+        <div className="lg:block hidden">
           <Image
             src="/globe-login.png"
             alt="globe login"
